@@ -82,7 +82,7 @@ public class FileResponseTest {
 
 		// Another cludged exception to simulate a real-world error state when attempting to determine the MIME type of
 		// a file.
-		when(file.toURI()).thenThrow(IOException.class);
+		when(file.toURI()).thenThrow(RuntimeException.class);
 
 		withResponse();
 	}
