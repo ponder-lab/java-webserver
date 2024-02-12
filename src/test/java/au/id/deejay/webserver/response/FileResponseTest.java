@@ -41,7 +41,7 @@ public class FileResponseTest {
 		withResponse();
 	}
 
-	@Test(expected = ResponseException.class)
+	@Test(expected = RuntimeException.class)
 	public void testMissingFileStreamThrowsException() throws Exception {
 		withIndexFile();
 		withResponse();
@@ -76,7 +76,7 @@ public class FileResponseTest {
 		assertThat(response.headers().value("Content-type"), is("text/html"));
 	}
 
-	@Test(expected = ResponseException.class)
+	@Test(expected = RuntimeException.class)
 	public void testUndetectableContentTypeThrowException() throws Exception {
 		withIndexFile();
 
