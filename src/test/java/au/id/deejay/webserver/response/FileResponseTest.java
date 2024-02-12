@@ -53,7 +53,7 @@ public class FileResponseTest {
 		// Simply using an invalid path won't work because the FileResponse constructor will throw an exception before
 		// stream() can be called.
 
-		doThrow(FileNotFoundException.class).when(file).getPath();
+		doThrow(new RuntimeException(new FileNotFoundException())).when(file).getPath();
 
 		response.stream();
 	}
@@ -82,7 +82,7 @@ public class FileResponseTest {
 
 		// Another cludged exception to simulate a real-world error state when attempting to determine the MIME type of
 		// a file.
-		when(file.toURI()).thenThrow(RuntimeException.class);
+		when(file.toURI()).thenThrow(new RuntimeException(new IOException()));
 
 		withResponse();
 	}
