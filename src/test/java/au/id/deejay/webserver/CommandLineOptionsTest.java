@@ -182,7 +182,7 @@ public class CommandLineOptionsTest {
 		options = new CommandLineOptions();
 		options.printHelpOn(outputStream);
 
-		verify(outputStream, atLeastOnce()).write(anyVararg(), anyInt(), anyInt());
+		verify(outputStream, atLeastOnce()).write(any(), anyInt(), anyInt());
 	}
 
 }

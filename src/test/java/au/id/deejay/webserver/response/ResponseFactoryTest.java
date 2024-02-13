@@ -7,13 +7,13 @@ import au.id.deejay.webserver.api.Response;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Arrays;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 /**
@@ -42,7 +42,6 @@ public class ResponseFactoryTest {
 
 		when(handler1.canHandle(any())).thenReturn(false);
 		when(handler2.canHandle(any())).thenReturn(true);
-		when(handler3.canHandle(any())).thenReturn(true);
 
 		Response response = responseFactory.response(request);
 
@@ -60,7 +59,6 @@ public class ResponseFactoryTest {
 		withResponseFactory();
 		when(handler1.canHandle(any())).thenReturn(false);
 		when(handler2.canHandle(any())).thenReturn(false);
-		when(handler3.canHandle(any())).thenReturn(false);
 
 		Response response = responseFactory.response(request);
 
