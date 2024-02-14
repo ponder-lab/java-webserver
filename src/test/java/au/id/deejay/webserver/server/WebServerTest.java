@@ -44,31 +44,26 @@ public class WebServerTest {
 	}
 
 	@Benchmark
-	// @Test(expected = IllegalArgumentException.class)
 	public void testPortLessThanZeroThrowsException() throws Exception {
 		new WebServer(-1, 10, 10, Collections.singletonList(mock(RequestHandler.class)));
 	}
 
 	@Benchmark
-	// @Test(expected = IllegalArgumentException.class)
 	public void testPortGreaterThan65535ThrowsException() throws Exception {
 		new WebServer(65536, 10, 10, Collections.singletonList(mock(RequestHandler.class)));
 	}
 
 	@Benchmark
-	// @Test(expected = IllegalArgumentException.class)
 	public void testMaxThreadsLessThanOneThrowsException() throws Exception {
 		new WebServer(0, 10, 0, Collections.singletonList(mock(RequestHandler.class)));
 	}
 
 	@Benchmark
-	// @Test(expected = IllegalArgumentException.class)
 	public void testNullRequestHandlersThrowsException() throws Exception {
 		new WebServer(0, 10, 10, null);
 	}
 
 	@Benchmark
-	// @Test(expected = IllegalArgumentException.class)
 	public void testEmptyRequestHandlersThrowsException() throws Exception {
 		new WebServer(0, 10, 10, Collections.emptyList());
 	}
@@ -82,7 +77,6 @@ public class WebServerTest {
 	}
 
 	@Benchmark
-	// @Test(expected = IllegalStateException.class)
 	public void testStartThrowsExceptionIfAlreadyRunning() throws Exception {
 		server.start();
 		assertThat(server.running(), is(true));
@@ -99,7 +93,6 @@ public class WebServerTest {
 
 
 	@Benchmark
-	// @Test(expected = IllegalStateException.class)
 	public void testStopThrowsExceptionIfNotRunning() throws Exception {
 		assertThat(server.running(), is(false));
 		server.stop();
