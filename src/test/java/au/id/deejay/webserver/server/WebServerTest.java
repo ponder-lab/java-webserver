@@ -29,7 +29,7 @@ public class WebServerTest {
 
 	@InjectMocks
 	private WebServer server = new WebServer(0, 10, 10, Collections.singletonList(mock(RequestHandler.class)));
-	
+
 	@After
 	@TearDown(Level.Invocation)
 	public void tearDown() throws Exception {
