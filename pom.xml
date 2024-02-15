@@ -47,6 +47,18 @@
                                 <argument>jmh-results.csv</argument>
                                 <argument>-o</argument>
                                 <argument>jmh-results.txt</argument>
+                                <!-- Only one iteration for now. -->
+                                <argument>-i</argument>
+                                <argument>1</argument>
+                                <!-- Fail on error. -->
+                                <argument>-foe</argument>
+                                <argument>true</argument>
+                                <!-- No warmup for now. -->
+                                <argument>-wi</argument>
+                                <argument>0</argument>
+                                <!-- Do a batch warmup. -->
+                                <argument>-wm</argument>
+                                <argument>BULK</argument>
                             </arguments>
                         </configuration>
                     </execution>
