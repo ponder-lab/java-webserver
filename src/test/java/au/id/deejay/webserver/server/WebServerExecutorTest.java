@@ -18,6 +18,7 @@ public class WebServerExecutorTest {
 
 	private WebServerExecutor executor;
 
+	@After
 	@TearDown(Level.Invocation)
 	public void tearDown() throws Exception {
 		if (executor != null && executor.running()) {
@@ -25,12 +26,14 @@ public class WebServerExecutorTest {
 		}
 	}
 
+	@Test
 	@Benchmark
 	public void testConstructor() throws Exception {
 		executor = new WebServerExecutor(0, 10, 10, mock(ResponseFactory.class));
 		assertThat(executor.running(), is(false));
 	}
 
+	@Test
 	@Benchmark
 	public void run() throws Exception {
 		executor = new WebServerExecutor(0, 10, 10, mock(ResponseFactory.class));
@@ -43,11 +46,13 @@ public class WebServerExecutorTest {
 		assertThat(executor.running(), is(true));
 	}
 
+	@Test
 	@Benchmark
 	public void running() throws Exception {
 
 	}
 
+	@Test
 	@Benchmark
 	public void stop() throws Exception {
 
