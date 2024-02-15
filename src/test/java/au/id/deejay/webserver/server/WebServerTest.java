@@ -1,11 +1,13 @@
 package au.id.deejay.webserver.server;
 
 import au.id.deejay.webserver.api.RequestHandler;
+import org.junit.Before;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.openjdk.jmh.annotations.*;
 
@@ -23,6 +25,18 @@ import static org.mockito.Mockito.verify;
 @RunWith(MockitoJUnitRunner.class)
 @State(Scope.Benchmark)
 public class WebServerTest {
+
+	private AutoCloseable closeable;
+
+       	@Before
+       	public void openMocks() {
+            closeable = MockitoAnnotations.openMocks(this);
+       	}
+
+       	@After
+       	public void releaseMocks() throws Exception {
+            closeable.close();
+       	}
 
 	@Mock
 	private WebServerExecutor executor;
