@@ -50,7 +50,7 @@ public class WebServerExecutor implements Runnable {
 	public void run() {
 		running = true;
 
-		threadPool = Executors.newFixedThreadPool(maxThreads);
+		threadPool = Executors.newVirtualThreadPerTaskExecutor();
 
 		try (ServerSocket serverSocket = new ServerSocket(port)) {
 
