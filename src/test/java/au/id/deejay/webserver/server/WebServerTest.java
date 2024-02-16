@@ -1,12 +1,15 @@
 package au.id.deejay.webserver.server;
 
 import au.id.deejay.webserver.api.RequestHandler;
+import org.junit.Before;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.openjdk.jmh.annotations.*;
 
 import java.util.Collections;
 
@@ -20,7 +23,16 @@ import static org.mockito.Mockito.verify;
  * @author David Jessup
  */
 @RunWith(MockitoJUnitRunner.class)
+@State(Scope.Benchmark)
 public class WebServerTest {
+
+	private AutoCloseable closeable;
+
+       	@Before
+	@Setup(Level.Invocation)
+       	public void openMocks() {
+            closeable = MockitoAnnotations.openMocks(this);
+       	}
 
 	@Mock
 	private WebServerExecutor executor;
@@ -29,13 +41,16 @@ public class WebServerTest {
 	private WebServer server = new WebServer(0, 10, 10, Collections.singletonList(mock(RequestHandler.class)));
 
 	@After
+	@TearDown(Level.Invocation)
 	public void tearDown() throws Exception {
 		if (server != null && server.running()) {
 			server.stop();
 		}
+		closeable.close();
 	}
 
 	@Test
+	@Benchmark
 	public void testConstructor() throws Exception {
 		server = new WebServer(0, 10, 10, Collections.singletonList(mock(RequestHandler.class)));
 		assertThat(server.running(), is(false));
@@ -67,6 +82,7 @@ public class WebServerTest {
 	}
 
 	@Test
+	@Benchmark
 	public void testStart() throws Exception {
 		server.start();
 		await().until(() -> server.running());
@@ -82,6 +98,7 @@ public class WebServerTest {
 	}
 
 	@Test
+	@Benchmark
 	public void testStop() throws Exception {
 		server.start();
 		server.stop();
@@ -97,6 +114,7 @@ public class WebServerTest {
 	}
 
 	@Test
+	@Benchmark
 	public void testRunning() throws Exception {
 		assertThat(server.running(), is(false));
 		server.start();
