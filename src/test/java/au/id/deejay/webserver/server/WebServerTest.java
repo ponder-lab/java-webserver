@@ -29,13 +29,9 @@ public class WebServerTest {
 	private AutoCloseable closeable;
 
        	@Before
+	@Setup(Level.Invocation)
        	public void openMocks() {
             closeable = MockitoAnnotations.openMocks(this);
-       	}
-
-       	@After
-       	public void releaseMocks() throws Exception {
-            closeable.close();
        	}
 
 	@Mock
@@ -50,6 +46,7 @@ public class WebServerTest {
 		if (server != null && server.running()) {
 			server.stop();
 		}
+		closeable.close();
 	}
 
 	@Test
